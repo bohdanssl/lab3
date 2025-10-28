@@ -6,7 +6,6 @@ class TicketRepository(BaseRepository):
         super().__init__(Ticket)
 
     def calculate_discount(self, ticket: Ticket):
-        """Розрахунок кінцевої ціни зі знижкою"""
         price = ticket.price
         if ticket.passenger.is_student:
             price *= 0.8  
@@ -17,7 +16,6 @@ class TicketRepository(BaseRepository):
         return round(price, 2)
 
     def create(self, **kwargs):
-        """Створюємо квиток і автоматично застосовуємо знижку"""
         ticket = super().create(**kwargs)
         discounted_price = self.calculate_discount(ticket)
         ticket.price = discounted_price
@@ -25,7 +23,6 @@ class TicketRepository(BaseRepository):
         return ticket
 
     def update(self, obj_id, **kwargs):
-        """Оновлюємо квиток і перераховуємо ціну зі знижкою"""
         ticket = super().update(obj_id, **kwargs)
         if ticket:
             ticket.price = self.calculate_discount(ticket)
