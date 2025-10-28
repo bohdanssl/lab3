@@ -12,8 +12,6 @@ class Passenger(models.Model):
         return f"{self.first_name} {self.last_name}"
 
     class Meta:
-        verbose_name = "Passenger"
-        verbose_name_plural = "Passengers"
         ordering = ["last_name", "first_name"]
 
 
@@ -26,8 +24,6 @@ class Train(models.Model):
         return f"Train {self.train_number}: {self.begin_point} → {self.end_point}"
 
     class Meta:
-        verbose_name = "Train"
-        verbose_name_plural = "Trains"
         ordering = ["train_number"]
 
 
@@ -52,6 +48,4 @@ class Ticket(models.Model):
         return f"Ticket ({self.ticket_type}) - {self.passenger}"
 
     class Meta:
-        verbose_name = "Ticket"
-        verbose_name_plural = "Tickets"
         ordering = ["-date_purchased"]
